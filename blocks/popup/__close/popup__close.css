@@ -1,0 +1,13 @@
+.popup__close {
+    position: relative;
+    left: 400px;
+    top: -45px;
+    width: 32px;
+    height: 32px;
+    background-color: transparent;
+    padding: 0;
+}
+
+.popup__close:hover {
+    opacity: .6;
+}

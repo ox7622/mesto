@@ -1,0 +1,10 @@
+.popup__submit {
+    width: 100%;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    padding: 14px 0 18px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    border: 0;
+}

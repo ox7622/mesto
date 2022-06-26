@@ -1,0 +1,9 @@
+.element__title-group {
+    display: flex;
+    flex-direction: row;
+    padding: 25px 20px 31px 21px;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+}

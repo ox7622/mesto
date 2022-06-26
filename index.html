@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Оксана Шовкопляс">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto Russia</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img src="./images/logo.svg" class="header__logo">
+    </header>
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="./images/kusto-ava.jpg">
+            <div class="profile__text-grid">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <img class="profile__edit-profile" src="./images/edit.svg">
+                <p class="profile__role">Исследователь океана</p>
+            </div>
+            <img class="profile__add-photo" src="./images/add.svg">
+        </section>
+        <section class="photos">
+            <ul class="elements">
+                <li class="element">
+                    <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
+                    <div class="element__title-group">
+                        <h2 class="element__title">Карачаевск</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
+                    <div class="element__title-group">
+                        <h2 class="element__title">Карачаево-Черкессия</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
+                    <div class="element__title-group">
+                        <h2 class="element__title">Карачаево-Черкессия</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
+                    <div class="element__title-group">
+                        <h2 class="element__title">Карачаево-Черкессия</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
+                    <div class="element__title-group">
+                        <h2 class="element__title">Карачаево-Черкессия</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
+                    <div class="element__title-group">
+                        <h2 class="element__title">Карачаево-Черкессия</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+    </footer>
+    <section class="popup">
+        <div class="popup__form">
+            <button class="popup__close"><img src="./images/close_icon.svg" alt="крестик"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input class="popup__input popup__input_name" type="text" name="firstname" value="Жак-Ив Кусто">
+            <input class="popup__input popup__input_role" type="text" name="role" value="Исследователь океана">
+            <button class="popup__submit">Сохранить</button>
+        </div>
+    </section>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>
