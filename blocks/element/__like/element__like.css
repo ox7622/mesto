@@ -2,6 +2,8 @@
     width: 22px;
     height: 19px;
     background-image: url(../../../images/like_heart.svg);
+    background-color: transparent;
+    border: 0;
 }
 
 .element__like:hover {

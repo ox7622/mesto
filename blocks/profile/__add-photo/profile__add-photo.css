@@ -2,9 +2,13 @@
     height: 50px;
     border: 2px solid white;
     padding: 14px 64px;
-    margin: auto 0 auto auto;
+    margin: 68px 0 auto auto;
     box-sizing: border-box;
     justify-self: flex-end;
+    background-color: transparent;
+    background: url(../../../images/add.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 @media screen and (max-width:1080px) {

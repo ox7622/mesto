@@ -14,8 +14,9 @@
     .profile__role {
         text-align: center;
         width: 100%;
-        padding: 14px 0 36px 0;
+        padding: 10px 0 36px 0;
         margin: 0 auto;
         text-align: center;
+        font-size: 14px;
     }
 }
