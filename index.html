@@ -18,10 +18,10 @@
             <div class="profile__avatar"></div>
             <div class="profile__text-grid">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button class="profile__edit-profile"></button>
+                <button class="profile__edit-profile" type="button" aria-label="редактировать профиль"></button>
                 <p class="profile__role">Исследователь океана</p>
             </div>
-            <button class="profile__add-photo"></button>
+            <button class="profile__add-photo" type="button" aria-label="добавить фото"></button>
         </section>
         <section class="photos">
             <ul class="elements">
@@ -29,42 +29,42 @@
                     <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
                     <div class="element__title-group">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button class="element__like"></button>
+                        <button class="element__like" type="button" aria-label="нравится"></button>
                     </div>
                 </li>
                 <li class="element">
-                    <img class="element__img" src="./images/elbrus.jpg" alt="храм в Карачаевске">
+                    <img class="element__img" src="./images/elbrus.jpg" alt="закат с видом на Эльбрус">
                     <div class="element__title-group">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like"></button>
+                        <button class="element__like" type="button" aria-label="нравится"></button>
                     </div>
                 </li>
                 <li class="element">
-                    <img class="element__img" src="./images/dombay.jpg" alt="храм в Карачаевске">
+                    <img class="element__img" src="./images/dombay.jpg" alt="Горы Домбая">
                     <div class="element__title-group">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like"></button>
+                        <button class="element__like" type="button" aria-label="нравится"></button>
                     </div>
                 </li>
                 <li class="element">
-                    <img class="element__img" src="./images/elbrus.jpg" alt="храм в Карачаевске">
+                    <img class="element__img" src="./images/elbrus.jpg" alt="закат с видом на Эльбрус">
                     <div class="element__title-group">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button class="element__like"></button>
+                        <button class="element__like" type="button" aria-label="нравится"></button>
                     </div>
                 </li>
                 <li class="element">
-                    <img class="element__img" src="./images/dombay.jpg" alt="храм в Карачаевске">
+                    <img class="element__img" src="./images/dombay.jpg" alt="Горы Домбая">
                     <div class="element__title-group">
                         <h2 class="element__title">Домбай</h2>
-                        <button class="element__like"></button>
+                        <button class="element__like" type="button" aria-label="нравится"></button>
                     </div>
                 </li>
                 <li class="element">
                     <img class="element__img" src="./images/karachaevsk.jpg" alt="храм в Карачаевске">
                     <div class="element__title-group">
                         <h2 class="element__title">Карачаево-Черкессия</h2>
-                        <button class="element__like"></button>
+                        <button class="element__like" type="button" aria-label="нравится"></button>
                     </div>
                 </li>
             </ul>
@@ -74,13 +74,17 @@
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
     <div class="popup">
-        <form class="popup__form">
-            <button class="popup__close"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input class="popup__input popup__input_name" type="text" name="firstname" value="Жак-Ив Кусто">
-            <input class="popup__input popup__input_role" type="text" name="role" value="Исследователь океана">
-            <button class="popup__submit">Сохранить</button>
-        </form>
+        <div class="popup__container">
+            <button class="popup__close" type="button" aria-label="закрыть окно"></button>
+            <form class="popup__form" name="editProfile">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input class="popup__input popup__input_field_name" type="text" name="firstname" value="Жак-Ив Кусто"
+                    required placeholder="Ваше имя">
+                <input class="popup__input popup__input_field_role" type="text" name="role" value="Исследователь океана"
+                    required placeholder="Напишите о себе">
+                <button class="popup__submit" type="submit">Сохранить</button>
+            </form>
+        </div>
     </div>
     <script src="./scripts/index.js"></script>
 </body>

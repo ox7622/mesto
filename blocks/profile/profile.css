@@ -9,7 +9,7 @@
     font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
-@media screen and (max-width:1088px) {
+@media screen and (max-width:1090px) {
     .profile {
         flex-direction: column;
         padding: 0 19px;

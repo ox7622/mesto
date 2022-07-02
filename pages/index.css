@@ -29,6 +29,7 @@
 @import url(../blocks/profile/__text-grid/profile__text-grid.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/_open/popup_open.css);
+@import url(../blocks/popup/__container/popup__container.css);
 
 
 

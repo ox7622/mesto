@@ -14,6 +14,7 @@
 
 .popup__submit:hover {
     opacity: .8;
+    transition: opacity .5s ease-in;
 }
 
 @media screen and (max-width:568px) {

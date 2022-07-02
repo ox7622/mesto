@@ -1,7 +1,7 @@
 .profile__add-photo {
     height: 50px;
     border: 2px solid white;
-    padding: 14px 64px;
+    padding: 14px 70px;
     margin: 68px 0 auto auto;
     box-sizing: border-box;
     justify-self: flex-end;
@@ -9,9 +9,11 @@
     background: url(../../../images/add.svg);
     background-repeat: no-repeat;
     background-position: center center;
+    cursor: pointer;
+    border-radius: 2px;
 }
 
-@media screen and (max-width:1080px) {
+@media screen and (max-width:1090px) {
     .profile__add-photo {
         margin: 36px 0;
         justify-self: center;
@@ -27,4 +29,5 @@
 
 .profile__add-photo:hover {
     opacity: .6;
+    transition: opacity .5s ease-in;
 }
