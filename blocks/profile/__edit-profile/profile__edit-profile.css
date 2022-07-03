@@ -9,7 +9,6 @@
     background: url(../../../images/edit.svg);
     background-repeat: no-repeat;
     background-position: center center;
-    cursor: pointer;
 }
 
 
@@ -20,10 +19,12 @@
         width: 18px;
         padding: 4.25px;
         align-self: flex-end;
+        background-size: 7.5px;
     }
 }
 
 .profile__edit-profile:hover {
     opacity: .6;
     transition: opacity .7s ease-in;
+    cursor: pointer;
 }

@@ -10,6 +10,8 @@ const formElement = popupElement.querySelector('.popup__form');
 
 function openPopup() {
     popupElement.classList.add('popup_open');
+    popupInputName.textContent = profileName.value;
+    popupInputRole.textContent = profileRole.value;
 };
 
 function closeWindow() {

@@ -9,8 +9,8 @@
     background: url(../../../images/add.svg);
     background-repeat: no-repeat;
     background-position: center center;
-    cursor: pointer;
     border-radius: 2px;
+    width: 150px;
 }
 
 @media screen and (max-width:1090px) {
@@ -24,10 +24,12 @@
 @media screen and (max-width:568px) {
     .profile__add-photo {
         margin: 0 0 36px 0;
+        background-size: 16px;
     }
 }
 
 .profile__add-photo:hover {
     opacity: .6;
     transition: opacity .5s ease-in;
+    cursor: pointer;
 }

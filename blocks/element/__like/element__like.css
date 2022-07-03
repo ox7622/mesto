@@ -4,10 +4,11 @@
     background-image: url(../../../images/like_heart.svg);
     background-color: transparent;
     border: 0;
-    cursor: pointer;
+    background-size: 22px 19px;
 }
 
 .element__like:hover {
     opacity: .5;
     transition: opacity .5s ease-in;
+    cursor: pointer;
 }
