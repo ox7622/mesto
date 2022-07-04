@@ -9,9 +9,9 @@ const profileEdit = profileElement.querySelector('.profile__edit-profile');
 const formElement = popupElement.querySelector('.popup__form');
 
 function openPopup() {
+    popupInputName.value = profileName.textContent;
+    popupInputRole.value = profileRole.textContent;
     popupElement.classList.add('popup_open');
-    popupInputName.textContent = profileName.value;
-    popupInputRole.textContent = profileRole.value;
 };
 
 function closeWindow() {
