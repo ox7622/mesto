@@ -3,6 +3,7 @@
 
 @import url(../blocks/content/content.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/element/__delete/element__delete.css);
 @import url(../blocks/element/__img/element__img.css);
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/element/__like/_active/element__like_active.css);
@@ -16,10 +17,17 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/photos/photos.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_open/popup_open.css);
 @import url(../blocks/popup/__close/popup__close.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__image-container/popup__image-container.css);
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__title/_type_large-view/popup__title_type_large-view.css);
+@import url(../blocks/popup/__view-image/popup__view-image.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__add-photo/profile__add-photo.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -27,13 +35,6 @@
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__role/profile__role.css);
 @import url(../blocks/profile/__text-grid/profile__text-grid.css);
-@import url(../blocks/popup/__form/popup__form.css);
-@import url(../blocks/popup/_open/popup_open.css);
-@import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/__view-image/popup__view-image.css);
-@import url(../blocks/popup/__container/__container_type_view-image/popup__container_type_view-image.css);
-@import url(../blocks/element/__delete/element__delete.css);
-@import url(../blocks/popup/__title/_type_large-view/popup__title_type_large-view.css);
 
 
 

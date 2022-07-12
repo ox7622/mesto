@@ -78,7 +78,6 @@ function openPopup(evt) {
         popupViewImage.classList.add('popup_open');
         popupViewImage.querySelector('.popup__image').setAttribute('src', evt.target.getAttribute('src'));
         popupViewImage.querySelector('.popup__title').textContent= evt.target.parentElement.querySelector('.element__title').textContent;
-        popupViewImage.querySelector('.popup__container').classList.add('popup__container_type_view-image');
         popupViewImage.querySelector('.popup__title').classList.add('popup__title_type_large-view');
 
     }
