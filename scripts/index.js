@@ -29,9 +29,9 @@ const elementsList = document.querySelector('.elements');
 const formElements = document.querySelectorAll('.popup__form');
 
 //попапы
-const popupEditProfile = document.querySelector('.popup__edit-profile');
-const popupAddPicture = document.querySelector('.popup__add-picture');
-const popupViewImage = document.querySelector('.popup__view-image');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
+const popupAddPicture = document.querySelector('.popup_add-picture');
+const popupViewImage = document.querySelector('.popup_view-image');
 
 
 const profileElement = document.querySelector('.profile');
