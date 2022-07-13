@@ -22,10 +22,12 @@ const initialCards = [
     {
         name: 'Байкал',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
+    },
 ];
 
 const elementsList = document.querySelector('.elements');
+const formElements = document.querySelectorAll('.popup__form');
+
 //попапы
 const popupEditProfile = document.querySelector('.popup__edit-profile');
 const popupAddPicture = document.querySelector('.popup__add-picture');
@@ -40,10 +42,6 @@ let profileRole = profileElement.querySelector('.profile__role');
 
 let popupPictureTitle = popupAddPicture.querySelector('.popup__input_field_place-name');
 let popupPictureLink = popupAddPicture.querySelector('.popup__input_field_place-link');
-
-
-const formElements = document.querySelectorAll('.popup__form');
-
 
 //кнопки
 const profileEdit = profileElement.querySelector('.profile__edit-profile');
@@ -77,7 +75,8 @@ function openPopup(evt) {
     } else {
         popupViewImage.classList.add('popup_open');
         popupViewImage.querySelector('.popup__image').setAttribute('src', evt.target.getAttribute('src'));
-        popupViewImage.querySelector('.popup__title').textContent= evt.target.parentElement.querySelector('.element__title').textContent;
+        popupViewImage.querySelector('.popup__image').setAttribute('alt', evt.target.getAttribute('alt'));
+        popupViewImage.querySelector('.popup__title').textContent = evt.target.parentElement.querySelector('.element__title').textContent;
         popupViewImage.querySelector('.popup__title').classList.add('popup__title_type_large-view');
 
     }
@@ -108,8 +107,8 @@ function removeItem(evt) {
 }
 
 initialCards.forEach(item => elementsList.append(addPicture(item.name, item.link)));
-
 popupClose.forEach(item => item.addEventListener('click', closeWindow));
 formElements.forEach(item => item.addEventListener('submit', saveButtonHandler));
+
 profileEdit.addEventListener('click', openPopup);
 addPictureButton.addEventListener('click', openPopup);
