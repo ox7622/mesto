@@ -78,7 +78,6 @@ function openPopup(evt) {
         popupViewImage.querySelector('.popup__image').setAttribute('alt', evt.target.getAttribute('alt'));
         popupViewImage.querySelector('.popup__title').textContent = evt.target.parentElement.querySelector('.element__title').textContent;
         popupViewImage.querySelector('.popup__title').classList.add('popup__title_type_large-view');
-
     }
 };
 
