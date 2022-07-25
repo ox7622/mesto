@@ -18,16 +18,19 @@
 @import url(../blocks/photos/photos.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_open/popup_open.css);
+@import url(../blocks/popup/_view-image/popup_view-image.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 @import url(../blocks/popup/__input/popup__input.css);
+@import url(../blocks/popup/__input/_type/popup__input_type_error.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
+@import url(../blocks/popup/__submit/_disabled/popup__submit_disabled.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__title/_type_large-view/popup__title_type_large-view.css);
-@import url(../blocks/popup/_view-image/popup_view-image.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__add-photo/profile__add-photo.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -35,6 +38,9 @@
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__role/profile__role.css);
 @import url(../blocks/profile/__text-grid/profile__text-grid.css);
+@import url(../blocks/popup/__error-message/popup__error-message.css);
+
+
 
 
 
