@@ -53,7 +53,6 @@ const popupPictureLink = popupAddPicture.querySelector('.popup__input_field_plac
 //кнопки
 const profileEditButton = profileElement.querySelector('.profile__edit-profile');
 const addPictureButton = profileElement.querySelector('.profile__add-photo');
-const popupCloseButtons = document.querySelectorAll('.popup__close');
 
 
 function addPicture(title, link) {
@@ -69,7 +68,7 @@ function addPicture(title, link) {
     placeElementTitle.textContent = title;
     placeElementLike.addEventListener('click', handleLike);
     placeElementDelete.addEventListener('click', removeItem);
-    placeElementImg.addEventListener('click', openViewImage);
+    placeElementImg.addEventListener('click', ()=> {openViewImage(title, link)});
     return placeElement;
 };
 
@@ -80,16 +79,14 @@ function openEditProfile() {
 };
 
 function openAddPhoto() {
-    formAddPhoto.reset();
     openPopup(popupAddPicture);
 };
 
-function openViewImage(evt) {
-    const alt = evt.target.getAttribute('alt');
+function openViewImage(title, link) {
     openPopup(popupViewImage);
-    popupViewImageImg.setAttribute('src', evt.target.getAttribute('src'));
-    popupViewImageImg.setAttribute('alt', alt);
-    popupViewImageTitle.textContent = alt;
+    popupViewImageImg.setAttribute('src', link);
+    popupViewImageImg.setAttribute('alt', title);
+    popupViewImageTitle.textContent = title;
     popupViewImageTitle.classList.add('popup__title_type_large-view');
 };
 
@@ -114,6 +111,9 @@ function saveEditProfile(evt) {
 function saveAddPhoto(evt) {
     evt.preventDefault();
     elementsList.prepend(addPicture(popupPictureTitle.value, popupPictureLink.value));
+    evt.target.reset();
+    evt.submitter.classList.add('popup__submit_disabled');
+    evt.submitter.setAttribute('disabled', true);
     closeWindow(popupAddPicture);
 };
 
@@ -133,16 +133,13 @@ function clearErrors(form) {
     inputs.forEach(item => item.classList.remove('popup__input_type_error'));
 };
 
-
 initialCards.forEach(item => elementsList.append(addPicture(item.name, item.link)));
 
-popupCloseButtons.forEach(item => {
-    const popup = item.closest('.popup');
-    item.addEventListener('click', () => closeWindow(popup));
-});
-
-popups.forEach(item => item.addEventListener('click', function (evt) {
-    if (evt.target == evt.currentTarget) {
+popups.forEach(item => item.addEventListener('mousedown', function (evt) {
+    if (evt.target.classList.contains('popup_open')) {
+        closeWindow(item);
+    }
+    if (evt.target.classList.contains('popup__close')) {
         closeWindow(item);
     }
 })
@@ -154,16 +151,6 @@ function closeOnEscape(evt) {
     }
 };
 
-function addOnEnter(form) {
-    const inputs = form.querySelectorAll('.popup__input');
-    inputs.forEach(item => {
-        item.addEventListener('keydown', function (evt) {
-            if (evt.key == "Enter") {
-                saveAddPhoto(evt);
-            }
-        })
-    })
-};
 
 profileEditButton.addEventListener('click', openEditProfile);
 addPictureButton.addEventListener('click', openAddPhoto);
