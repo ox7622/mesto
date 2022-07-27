@@ -49,6 +49,7 @@ function setInputListeners(form, config) {
     
 };
 
+
 function hasInvalidInput(inputList) {
     return inputList.some(input => {
         return !input.validity.valid;

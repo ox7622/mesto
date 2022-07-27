@@ -68,13 +68,14 @@ function addPicture(title, link) {
     placeElementTitle.textContent = title;
     placeElementLike.addEventListener('click', handleLike);
     placeElementDelete.addEventListener('click', removeItem);
-    placeElementImg.addEventListener('click', ()=> {openViewImage(title, link)});
+    placeElementImg.addEventListener('click', () => { openViewImage(title, link) });
     return placeElement;
 };
 
 function openEditProfile() {
     popupInputName.value = profileName.textContent;
     popupInputRole.value = profileRole.textContent;
+    clearErrors(popupEditProfile);
     openPopup(popupEditProfile);
 };
 
@@ -93,7 +94,6 @@ function openViewImage(title, link) {
 function openPopup(popup) {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closeOnEscape);
-    clearErrors(popup);
 };
 
 function closeWindow(popup) {
@@ -136,10 +136,7 @@ function clearErrors(form) {
 initialCards.forEach(item => elementsList.append(addPicture(item.name, item.link)));
 
 popups.forEach(item => item.addEventListener('mousedown', function (evt) {
-    if (evt.target.classList.contains('popup_open')) {
-        closeWindow(item);
-    }
-    if (evt.target.classList.contains('popup__close')) {
+    if (evt.target.classList.contains('popup_open') || evt.target.classList.contains('popup__close')) {
         closeWindow(item);
     }
 })
