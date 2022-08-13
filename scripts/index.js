@@ -1,35 +1,10 @@
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    },
-];
+import { Card } from "./Card.js";
+import { FormValidator, selectors } from "./FormValidator.js";
 
 const elementsList = document.querySelector('.elements');
 
 const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const formAddPhoto = document.querySelector('.popup__form_type_add-photo');
-const placeTemplate = document.querySelector('#add-picture').content;
 
 //попапы
 const popupEditProfile = document.querySelector('.popup_edit-profile');
@@ -55,23 +30,6 @@ const profileEditButton = profileElement.querySelector('.profile__edit-profile')
 const addPictureButton = profileElement.querySelector('.profile__add-photo');
 
 
-function addPicture(title, link) {
-    const placeElement = placeTemplate.cloneNode(true);
-    const placeElementImg = placeElement.querySelector('.element__img');
-    const placeElementTitle = placeElement.querySelector('.element__title');
-    const placeElementLike = placeElement.querySelector('.element__like');
-    const placeElementDelete = placeElement.querySelector('.element__delete');
-
-    placeElementImg.setAttribute('src', link);
-    placeElementImg.setAttribute('alt', title);
-
-    placeElementTitle.textContent = title;
-    placeElementLike.addEventListener('click', handleLike);
-    placeElementDelete.addEventListener('click', removeItem);
-    placeElementImg.addEventListener('click', () => { openViewImage(title, link) });
-    return placeElement;
-};
-
 function openEditProfile() {
     popupInputName.value = profileName.textContent;
     popupInputRole.value = profileRole.textContent;
@@ -83,7 +41,7 @@ function openAddPhoto() {
     openPopup(popupAddPicture);
 };
 
-function openViewImage(title, link) {
+export function openViewImage(title, link) {
     openPopup(popupViewImage);
     popupViewImageImg.setAttribute('src', link);
     popupViewImageImg.setAttribute('alt', title);
@@ -110,21 +68,19 @@ function saveEditProfile(evt) {
 
 function saveAddPhoto(evt) {
     evt.preventDefault();
-    elementsList.prepend(addPicture(popupPictureTitle.value, popupPictureLink.value));
+    const item = {
+        name:popupPictureTitle.value,
+        link:popupPictureLink.value
+    }
+    const card = new Card(item, "#add-picture");
+    const cardEl = card.generateCard();
+    elementsList.prepend(cardEl);
     evt.target.reset();
     evt.submitter.classList.add('popup__submit_disabled');
     evt.submitter.setAttribute('disabled', true);
     closeWindow(popupAddPicture);
 };
 
-function handleLike(evt) {
-    evt.target.classList.toggle('element__like_active');
-};
-
-function removeItem(evt) {
-    const item = evt.target.closest('.element');
-    item.remove();
-};
 
 function clearErrors(form) {
     const errorSpans = form.querySelectorAll('.popup__error-message');
@@ -133,7 +89,6 @@ function clearErrors(form) {
     inputs.forEach(item => item.classList.remove('popup__input_type_error'));
 };
 
-initialCards.forEach(item => elementsList.append(addPicture(item.name, item.link)));
 
 popups.forEach(item => item.addEventListener('mousedown', function (evt) {
     if (evt.target.classList.contains('popup_open') || evt.target.classList.contains('popup__close')) {
@@ -153,3 +108,9 @@ profileEditButton.addEventListener('click', openEditProfile);
 addPictureButton.addEventListener('click', openAddPhoto);
 formEditProfile.addEventListener('submit', saveEditProfile);
 formAddPhoto.addEventListener('submit', saveAddPhoto);
+
+const editProfileValidation =  new FormValidator(selectors, '.popup__form_type_edit-profile');
+editProfileValidation.enableValidation();
+
+const addPhotoValidation =  new FormValidator(selectors, '.popup__form_type_add-photo');
+addPhotoValidation.enableValidation();

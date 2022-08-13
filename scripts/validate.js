@@ -34,6 +34,7 @@ function isValid(form, input, config) {
 
 };
 
+
 function setInputListeners(form, config) {
     const inputsArray = Array.from(form.querySelectorAll(config.inputSelector));
     const button = form.querySelector(config.submitButtonSelector);
@@ -72,3 +73,4 @@ function enableValidation(config) {
 };
 
 enableValidation(selectors);
+
