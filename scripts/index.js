@@ -1,5 +1,5 @@
-import { Card } from "./Card.js";
-import { FormValidator, selectors } from "./FormValidator.js";
+import { Card, selectorsCard } from "./Card.js";
+import { FormValidator, selectorsValidation} from "./FormValidator.js";
 import { dataArray } from "./initialCardsArray.js";
 import { openPopup, closeWindow } from "./utils.js";
 
@@ -36,7 +36,7 @@ function handleOpenEditProfile() {
 
 function handleOpenAddPhoto() {
     openPopup(popupAddPicture);
-   
+
 };
 
 function handleSaveEditProfile(evt) {
@@ -59,8 +59,19 @@ function handleSaveAddPhoto(evt) {
     closeWindow(popupAddPicture);
 };
 
+export function createOpenViewImagePopup(name, link) {
+    const popupViewImage = document.querySelector(selectorsCard.popupViewImage);
+    const popupViewImageImg = popupViewImage.querySelector(selectorsCard.popupViewImageImg);
+    const popupViewImageTitle = popupViewImage.querySelector(selectorsCard.popupViewImageTitle);
+    openPopup(popupViewImage);
+    popupViewImageImg.src = link;
+    popupViewImageImg.alt = name;
+    popupViewImageTitle.textContent = name;
+    popupViewImageTitle.classList.add('popup__title_type_large-view');
+}
+
 function renderCard(cardDetails) {
-    const card = new Card(cardDetails, document.querySelector("#add-picture"));
+    const card = new Card(cardDetails, "#add-picture");
     return card.generateCard();
 }
 
@@ -86,8 +97,8 @@ addPictureButton.addEventListener('click', handleOpenAddPhoto);
 formEditProfile.addEventListener('submit', handleSaveEditProfile);
 formAddPhoto.addEventListener('submit', handleSaveAddPhoto);
 
-const editProfileValidation = new FormValidator(selectors, popupEditProfile);
+const editProfileValidation = new FormValidator(selectorsValidation, popupEditProfile);
 editProfileValidation.enableValidation();
 
-const addPhotoValidation = new FormValidator(selectors, popupAddPicture);
+const addPhotoValidation = new FormValidator(selectorsValidation, popupAddPicture);
 addPhotoValidation.enableValidation();

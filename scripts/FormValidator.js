@@ -1,4 +1,4 @@
-export const selectors = {
+export const selectorsValidation = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__submit',
@@ -61,12 +61,8 @@ export class FormValidator {
     };
 
     clearErrors() {
-        const errorSpans = this._form.querySelectorAll(this._selectors.errorSpan);
-        errorSpans.forEach(span => span.textContent = '');
-        console.log('errors are cleared');
-        this._inputList.forEach(input => input.classList.remove('popup__input_type_error'));
+        this._inputList.forEach(input => this._hideError(input));
     };
-
 
     _setInputListeners() {
         this._toggleButtonState();

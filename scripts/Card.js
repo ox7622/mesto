@@ -1,6 +1,6 @@
-import { openPopup } from "./utils.js";
 
-const selectors = {
+import { createOpenViewImagePopup } from "./index.js";
+export const selectorsCard = {
     cardBlock: '.card',
     cardImage: '.card__img',
     cardTitle: '.card__title',
@@ -13,17 +13,18 @@ const selectors = {
 }
 
 export class Card {
-    constructor(data, formTemplate) {
+    constructor(data, cardTemplateSelector) {
         this._name = data.name;
         this._link = data.link;
-        this._formTemplate = formTemplate;
-        this._templateCard = this._formTemplate.content.querySelector(selectors.cardBlock).cloneNode(true);
-        this._cardImage = this._templateCard.querySelector(selectors.cardImage);
-
+        this._cardTemplateSelector = cardTemplateSelector;
     }
 
+    _getTemplate() {
+        return this._templateCard = document.querySelector(this._cardTemplateSelector).content.querySelector(selectorsCard.cardBlock).cloneNode(true);
+    };
+
     _handleLike() {
-        this._card.querySelector(selectors.cardLike).classList.toggle(selectors.isLiked);
+        this._cardLike.classList.toggle(selectorsCard.isLiked);
     }
     _handleImageRemove() {
         this._card.remove();
@@ -31,33 +32,28 @@ export class Card {
     }
 
     generateCard() {
-        this._card = this._templateCard;
+        this._card = this._getTemplate();
+        this._cardImage = this._card.querySelector(selectorsCard.cardImage);
+        this._cardLike = this._card.querySelector(selectorsCard.cardLike);
         this._setEventListeners();
 
         this._cardImage.src=this._link;
         this._cardImage.alt= this._name;
 
-        this._card.querySelector(selectors.cardTitle).textContent = this._name;
+        this._card.querySelector(selectorsCard.cardTitle).textContent = this._name;
         return this._card;
     }
 
     _handleOpenViewImage() {
-        const popupViewImage = document.querySelector(selectors.popupViewImage);
-        const popupViewImageImg = popupViewImage.querySelector(selectors.popupViewImageImg);
-        const popupViewImageTitle = popupViewImage.querySelector(selectors.popupViewImageTitle);
-        openPopup(popupViewImage);
-        popupViewImageImg.src = this._link;
-        popupViewImageImg.alt = this._name;
-        popupViewImageTitle.textContent = this._name;
-        popupViewImageTitle.classList.add('popup__title_type_large-view');
+        createOpenViewImagePopup(this._name, this._link);
     };
 
     _setEventListeners() {
-        this._card.querySelector(selectors.cardLike).addEventListener('click', () => {
+        this._cardLike.addEventListener('click', () => {
             this._handleLike();
         })
 
-        this._card.querySelector(selectors.cardDelete).addEventListener('click', () => {
+        this._card.querySelector(selectorsCard.cardDelete).addEventListener('click', () => {
             this._handleImageRemove();
         })
 
