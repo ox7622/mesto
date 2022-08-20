@@ -34,8 +34,8 @@ export class Card {
         this._card = this._templateCard;
         this._setEventListeners();
 
-        this._cardImage.setAttribute('src', this._link);
-        this._cardImage.setAttribute('alt', this._name);
+        this._cardImage.src=this._link;
+        this._cardImage.alt= this._name;
 
         this._card.querySelector(selectors.cardTitle).textContent = this._name;
         return this._card;
@@ -46,8 +46,8 @@ export class Card {
         const popupViewImageImg = popupViewImage.querySelector(selectors.popupViewImageImg);
         const popupViewImageTitle = popupViewImage.querySelector(selectors.popupViewImageTitle);
         openPopup(popupViewImage);
-        popupViewImageImg.setAttribute('src', this._link);
-        popupViewImageImg.setAttribute('alt', this._name);
+        popupViewImageImg.src = this._link;
+        popupViewImageImg.alt = this._name;
         popupViewImageTitle.textContent = this._name;
         popupViewImageTitle.classList.add('popup__title_type_large-view');
     };
