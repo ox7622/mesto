@@ -1,7 +1,9 @@
 import { Card } from "./Card.js";
 import { FormValidator, selectors } from "./FormValidator.js";
+import { dataArray } from "./initialCardsArray.js";
+import { openPopup, closeWindow } from "./utils.js";
 
-const elementsList = document.querySelector('.elements');
+const cardsContainer = document.querySelector('.cards');
 
 const formEditProfile = document.querySelector('.popup__form_type_edit-profile');
 const formAddPhoto = document.querySelector('.popup__form_type_add-photo');
@@ -9,108 +11,83 @@ const formAddPhoto = document.querySelector('.popup__form_type_add-photo');
 //попапы
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddPicture = document.querySelector('.popup_add-picture');
-const popupViewImage = document.querySelector('.popup_view-image');
 const popups = document.querySelectorAll('.popup');
 
-//popup view-image
-const popupViewImageImg = popupViewImage.querySelector('.popup__image');
-const popupViewImageTitle = popupViewImage.querySelector('.popup__title');
-
-const profileElement = document.querySelector('.profile');
+const profileSection = document.querySelector('.profile');
 const popupInputName = popupEditProfile.querySelector('.popup__input_field_name');
 const popupInputRole = popupEditProfile.querySelector('.popup__input_field_role');
-const profileName = profileElement.querySelector('.profile__name');
-const profileRole = profileElement.querySelector('.profile__role');
+const profileName = profileSection.querySelector('.profile__name');
+const profileRole = profileSection.querySelector('.profile__role');
 
 const popupPictureTitle = popupAddPicture.querySelector('.popup__input_field_place-name');
 const popupPictureLink = popupAddPicture.querySelector('.popup__input_field_place-link');
 
 //кнопки
-const profileEditButton = profileElement.querySelector('.profile__edit-profile');
-const addPictureButton = profileElement.querySelector('.profile__add-photo');
+const profileEditButton = profileSection.querySelector('.profile__edit-profile');
+const addPictureButton = profileSection.querySelector('.profile__add-photo');
 
 
-function openEditProfile() {
+function handleOpenEditProfile() {
     popupInputName.value = profileName.textContent;
     popupInputRole.value = profileRole.textContent;
-    clearErrors(popupEditProfile);
+    editProfileValidation.clearErrors();
     openPopup(popupEditProfile);
 };
 
-function openAddPhoto() {
+function handleOpenAddPhoto() {
     openPopup(popupAddPicture);
+   
 };
 
-export function openViewImage(title, link) {
-    openPopup(popupViewImage);
-    popupViewImageImg.setAttribute('src', link);
-    popupViewImageImg.setAttribute('alt', title);
-    popupViewImageTitle.textContent = title;
-    popupViewImageTitle.classList.add('popup__title_type_large-view');
-};
-
-function openPopup(popup) {
-    popup.classList.add('popup_open');
-    document.addEventListener('keydown', closeOnEscape);
-};
-
-function closeWindow(popup) {
-    popup.classList.remove('popup_open');
-    document.removeEventListener('keydown', closeOnEscape);
-};
-
-function saveEditProfile(evt) {
+function handleSaveEditProfile(evt) {
     evt.preventDefault();
     profileName.textContent = popupInputName.value;
     profileRole.textContent = popupInputRole.value;
     closeWindow(popupEditProfile);
 };
 
-function saveAddPhoto(evt) {
+function handleSaveAddPhoto(evt) {
     evt.preventDefault();
-    const item = {
-        name:popupPictureTitle.value,
-        link:popupPictureLink.value
+    const cardData = {
+        name: popupPictureTitle.value,
+        link: popupPictureLink.value
     }
-    const card = new Card(item, "#add-picture");
-    const cardEl = card.generateCard();
-    elementsList.prepend(cardEl);
+    const card = renderCard(cardData);
+    cardsContainer.prepend(card);
     evt.target.reset();
-    evt.submitter.classList.add('popup__submit_disabled');
-    evt.submitter.setAttribute('disabled', true);
+    addPhotoValidation.disableSubmitButton();
     closeWindow(popupAddPicture);
 };
 
+function renderCard(cardDetails) {
+    const card = new Card(cardDetails, document.querySelector("#add-picture"));
+    return card.generateCard();
+}
 
-function clearErrors(form) {
-    const errorSpans = form.querySelectorAll('.popup__error-message');
-    const inputs = form.querySelectorAll('.popup__input');
-    errorSpans.forEach(item => item.textContent = '');
-    inputs.forEach(item => item.classList.remove('popup__input_type_error'));
-};
-
-
-popups.forEach(item => item.addEventListener('mousedown', function (evt) {
+function handleClosePopups(evt, popup) {
     if (evt.target.classList.contains('popup_open') || evt.target.classList.contains('popup__close')) {
-        closeWindow(item);
-    }
-})
-);
-
-function closeOnEscape(evt) {
-    if (evt.key == "Escape") {
-        closeWindow(document.querySelector('.popup_open'));
+        closeWindow(popup);
     }
 };
 
+dataArray.forEach((cardDetails) => {
+    const card = renderCard(cardDetails);
+    cardsContainer.append(card);
+});
 
-profileEditButton.addEventListener('click', openEditProfile);
-addPictureButton.addEventListener('click', openAddPhoto);
-formEditProfile.addEventListener('submit', saveEditProfile);
-formAddPhoto.addEventListener('submit', saveAddPhoto);
 
-const editProfileValidation =  new FormValidator(selectors, '.popup__form_type_edit-profile');
+popups.forEach(popup => popup.addEventListener('mousedown', (evt) => {
+    handleClosePopups(evt, popup);
+}));
+
+
+profileEditButton.addEventListener('click', handleOpenEditProfile);
+addPictureButton.addEventListener('click', handleOpenAddPhoto);
+formEditProfile.addEventListener('submit', handleSaveEditProfile);
+formAddPhoto.addEventListener('submit', handleSaveAddPhoto);
+
+const editProfileValidation = new FormValidator(selectors, popupEditProfile);
 editProfileValidation.enableValidation();
 
-const addPhotoValidation =  new FormValidator(selectors, '.popup__form_type_add-photo');
+const addPhotoValidation = new FormValidator(selectors, popupAddPicture);
 addPhotoValidation.enableValidation();
