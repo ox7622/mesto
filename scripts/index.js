@@ -1,4 +1,4 @@
-import { Card, selectorsCard } from "./Card.js";
+import { Card } from "./Card.js";
 import { FormValidator, selectorsValidation} from "./FormValidator.js";
 import { dataArray } from "./initialCardsArray.js";
 import { openPopup, closeWindow } from "./utils.js";
@@ -26,10 +26,10 @@ const popupPictureLink = popupAddPicture.querySelector('.popup__input_field_plac
 const profileEditButton = profileSection.querySelector('.profile__edit-profile');
 const addPictureButton = profileSection.querySelector('.profile__add-photo');
 
-
 function handleOpenEditProfile() {
     popupInputName.value = profileName.textContent;
     popupInputRole.value = profileRole.textContent;
+    editProfileValidation.enableValidation();
     editProfileValidation.clearErrors();
     openPopup(popupEditProfile);
 };
@@ -58,17 +58,6 @@ function handleSaveAddPhoto(evt) {
     addPhotoValidation.disableSubmitButton();
     closeWindow(popupAddPicture);
 };
-
-export function createOpenViewImagePopup(name, link) {
-    const popupViewImage = document.querySelector(selectorsCard.popupViewImage);
-    const popupViewImageImg = popupViewImage.querySelector(selectorsCard.popupViewImageImg);
-    const popupViewImageTitle = popupViewImage.querySelector(selectorsCard.popupViewImageTitle);
-    openPopup(popupViewImage);
-    popupViewImageImg.src = link;
-    popupViewImageImg.alt = name;
-    popupViewImageTitle.textContent = name;
-    popupViewImageTitle.classList.add('popup__title_type_large-view');
-}
 
 function renderCard(cardDetails) {
     const card = new Card(cardDetails, "#add-picture");

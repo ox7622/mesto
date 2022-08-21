@@ -1,15 +1,13 @@
 
-import { createOpenViewImagePopup } from "./index.js";
-export const selectorsCard = {
+import { openImagePopup } from "./utils.js";
+
+const selectorsCard = {
     cardBlock: '.card',
     cardImage: '.card__img',
     cardTitle: '.card__title',
     isLiked: 'card__like_active',
     cardLike: '.card__like',
     cardDelete: '.card__delete',
-    popupViewImage: '.popup_view-image',
-    popupViewImageImg: '.popup__image',
-    popupViewImageTitle: '.popup__title'
 }
 
 export class Card {
@@ -37,15 +35,15 @@ export class Card {
         this._cardLike = this._card.querySelector(selectorsCard.cardLike);
         this._setEventListeners();
 
-        this._cardImage.src=this._link;
-        this._cardImage.alt= this._name;
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
 
         this._card.querySelector(selectorsCard.cardTitle).textContent = this._name;
         return this._card;
     }
 
     _handleOpenViewImage() {
-        createOpenViewImagePopup(this._name, this._link);
+        openImagePopup({ name: this._name, link: this._link });
     };
 
     _setEventListeners() {

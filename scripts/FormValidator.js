@@ -39,7 +39,6 @@ export class FormValidator {
         }
     };
 
-
     _hasInvalidInput() {
         return this._inputList.some(input => {
             return !input.validity.valid;
