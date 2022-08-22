@@ -29,7 +29,6 @@ const addPictureButton = profileSection.querySelector('.profile__add-photo');
 function handleOpenEditProfile() {
     popupInputName.value = profileName.textContent;
     popupInputRole.value = profileRole.textContent;
-    editProfileValidation.enableValidation();
     editProfileValidation.clearErrors();
     openPopup(popupEditProfile);
 };

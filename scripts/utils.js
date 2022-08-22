@@ -1,4 +1,3 @@
-
 // View image popup
 const popupViewImage = document.querySelector('.popup_view-image');
 const popupViewImageImg = popupViewImage.querySelector('.popup__image');
