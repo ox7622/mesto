@@ -8,9 +8,8 @@ export default class UserInfo {
         return { name: this._name.textContent, role: this._role.textContent };
     }
 
-    setUserInfo(data) {
-        data = { name: Object.values(data)[0], role: Object.values(data)[1] };
-        this._name.textContent = data.name;
-        this._role.textContent = data.role;
+    setUserInfo({name,role}) {
+        this._name.textContent = name;
+        this._role.textContent = role;
     }
 }

@@ -1,13 +1,5 @@
-const selectorsCard = {
-    cardBlock: '.card',
-    cardImage: '.card__img',
-    cardTitle: '.card__title',
-    isLiked: 'card__like_active',
-    cardLike: '.card__like',
-    cardDelete: '.card__delete',
-}
-
-export class Card {
+import { selectorsCard } from "../utils/constants.js";
+export default class Card {
     constructor({ data, handleCardClick }, cardTemplateSelector) {
         this._name = data.name;
         this._link = data.link;
@@ -16,7 +8,10 @@ export class Card {
     }
 
     _getTemplate() {
-        return this._templateCard = document.querySelector(this._cardTemplateSelector).content.querySelector(selectorsCard.cardBlock).cloneNode(true);
+        return this._templateCard = document.querySelector(this._cardTemplateSelector)
+        .content
+        .querySelector(selectorsCard.cardBlock)
+        .cloneNode(true);
     };
 
     _handleLike() {

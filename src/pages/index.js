@@ -1,18 +1,18 @@
 import './index.css';
 
-import { Card } from "../scripts/components/Card.js";
-import PopupWithImage from "../scripts/components/PopupWithImage.js";
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import Section from "../scripts/components/Section.js";
-import UserInfo from "../scripts/components/UserInfo.js";
-import { FormValidator, selectorsValidation } from "../scripts/components/FormValidator.js";
-import { dataArray } from "../scripts/initialCardsArray.js";
+import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import { FormValidator, selectorsValidation } from "../components/FormValidator.js";
+import { dataArray } from "../utils/initialCardsArray.js";
 
 
 const indexSelectors = {
     profile: '.profile',
-    editProfileButton: '.profile__edit-profile',
-    addPictureButton: '.profile__add-photo',
+    buttonEditProfile: '.profile__edit-profile',
+    buttonAddPicture: '.profile__add-photo',
     profileName: '.profile__name',
     profileRole: '.profile__role',
     nameInput: '.popup__input_field_name',
@@ -26,8 +26,8 @@ const popupEditProfile = document.querySelector(indexSelectors.popupEditProfile)
 const popupAddPicture = document.querySelector(indexSelectors.popupAddPicture);
 
 const profileSection = document.querySelector(indexSelectors.profile);
-const profileEditButton = profileSection.querySelector(indexSelectors.editProfileButton);
-const addPictureButton = profileSection.querySelector(indexSelectors.addPictureButton);
+const buttonProfileEdit = profileSection.querySelector(indexSelectors.buttonEditProfile);
+const buttonAddPicture = profileSection.querySelector(indexSelectors.buttonAddPicture);
 
 const userInfo = new UserInfo(indexSelectors.profileName, indexSelectors.profileRole);
 
@@ -56,18 +56,18 @@ addPhotoForm.setEventListeners();
 function handleOpenEditProfile() {
     editProfileValidation.clearErrors();
     const updatedData = userInfo.getUserInfo();
-    editProfileForm.setInputValues(indexSelectors.nameInput, indexSelectors.roleInput, updatedData);
+    editProfileForm.setInputValues(updatedData);
     editProfileForm.open();
 };
 
+const imagePopup = new PopupWithImage(indexSelectors.popupViewImage);
+
 function handleCardClick(name, link) {
-    const imagePopup = new PopupWithImage({ name, link }, indexSelectors.popupViewImage);
     imagePopup.setEventListeners();
-    imagePopup.open();
+    imagePopup.open(name,link);
 };
 
 function renderCard(cardDetails) {
-    cardDetails = { name: Object.values(cardDetails)[0], link: Object.values(cardDetails)[1] };
     const card = new Card({ data: cardDetails, handleCardClick }, "#add-picture");
     return card.generateCard();
 }
@@ -82,8 +82,8 @@ const cardsSection = new Section({
 
 cardsSection.renderItem();
 
-profileEditButton.addEventListener('click', handleOpenEditProfile);
-addPictureButton.addEventListener('click', () => {
+buttonProfileEdit.addEventListener('click', handleOpenEditProfile);
+buttonAddPicture.addEventListener('click', () => {
     addPhotoValidation.clearErrors();
     addPhotoForm.open();
 })
