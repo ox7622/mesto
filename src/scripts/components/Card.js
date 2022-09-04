@@ -1,6 +1,3 @@
-
-import { openImagePopup } from "./utils.js";
-
 const selectorsCard = {
     cardBlock: '.card',
     cardImage: '.card__img',
@@ -11,10 +8,11 @@ const selectorsCard = {
 }
 
 export class Card {
-    constructor(data, cardTemplateSelector) {
+    constructor({ data, handleCardClick }, cardTemplateSelector) {
         this._name = data.name;
         this._link = data.link;
         this._cardTemplateSelector = cardTemplateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -42,10 +40,6 @@ export class Card {
         return this._card;
     }
 
-    _handleOpenViewImage() {
-        openImagePopup({ name: this._name, link: this._link });
-    };
-
     _setEventListeners() {
         this._cardLike.addEventListener('click', () => {
             this._handleLike();
@@ -56,7 +50,7 @@ export class Card {
         })
 
         this._cardImage.addEventListener('click', () => {
-            this._handleOpenViewImage();
+            this._handleCardClick(this._name, this._link);
         })
     }
 };

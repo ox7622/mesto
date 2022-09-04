@@ -1,0 +1,38 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "Проект реализован с помощью технологий Html, CSS3 и JavaScript. В первом спринте на JS выполнен функционал открытия выпадающего меню и возможность изменить имя и место работы в профиле. \r Во втором спринте добавлен функционал удаления картинок, добавления картинок, проставления лайков и просмотра изображения.\r В третьем спринте добавлена валидация форм на минимальное количество символов и ссылки, а также расширены возможности закрытия выпадающих окон и добавления карточек. Теперь выпадающие окна закрываются по клику вокруг в темном поле и нажатию Esc, а карточки добавляются нажатием Enter в полях ввода.\r В следующем спринте произведен рефакторинг кода предыдущих спринтов по темам валидации форм и создания карточек. созданы классы Card и FormValidator, также добавлен кастомный текст ошибки.\r В 8 спринте был проведен рефакторинг по ООП с созданием классов - Popup, PopupWithForm, PopupWithImage, Section, UserInfo",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "dev": "webpack serve",
+    "gh pages": "npm run build && gh pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ox7622/mesto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ox7622/mesto/issues"
+  },
+  "homepage": "https://github.com/ox7622/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "autoprefixer": "^10.4.8",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "core-js": "^3.25.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.13",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss-loader": "^7.0.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.1"
+  }
+}

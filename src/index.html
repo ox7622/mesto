@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Оксана Шовкопляс">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto Russia</title>
 </head>
 
 <body class="page">
     <header class="header">
-        <img src="./images/logo.svg" class="header__logo" alt="лого Mesto">
+        <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="лого Mesto">
     </header>
     <main class="content">
         <section class="profile">
@@ -36,11 +35,11 @@
             <button class="popup__close" type="button" aria-label="закрыть окно"></button>
             <form class="popup__form popup__form_type_edit-profile" name="editProfile" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__input popup__input_field_name" type="text" name="firstname" id="name-input" value="Жак-Ив Кусто"
-                    required placeholder="Ваше имя" minlength="2" maxlength="40">
+                <input class="popup__input popup__input_field_name" type="text" name="profile-name" id="name-input"
+                    value="Жак-Ив Кусто" required placeholder="Ваше имя" minlength="2" maxlength="40">
                 <span class="popup__error-message name-input-error"></span>
-                <input class="popup__input popup__input_field_role" type="text" name="role" id="role-input" value="Исследователь океана"
-                    required placeholder="Напишите о себе" minlength="2" maxlength="200">
+                <input class="popup__input popup__input_field_role" type="text" name="profile-role" id="role-input"
+                    value="Исследователь океана" required placeholder="Напишите о себе" minlength="2" maxlength="200">
                 <span class="popup__error-message role-input-error"></span>
                 <button class="popup__submit" type="submit">Сохранить</button>
             </form>
@@ -51,11 +50,11 @@
             <button class="popup__close" type="button" aria-label="закрыть окно"></button>
             <form class="popup__form popup__form_type_add-photo" name="addPicture" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__input popup__input_field_place-name" type="text" name="place-name" id="place-name-input"  required
-                    placeholder="Название" minlength="2" maxlength="30">
+                <input class="popup__input popup__input_field_place-name" type="text" name="place-name"
+                    id="place-name-input" required placeholder="Название" minlength="2" maxlength="30">
                 <span class="popup__error-message place-name-input-error"></span>
-                <input class="popup__input popup__input_field_place-link" type="url" name="place-link" id="place-link-input" required
-                    placeholder="Ссылка на картинку" >
+                <input class="popup__input popup__input_field_place-link" type="url" name="place-link"
+                    id="place-link-input" required placeholder="Ссылка на картинку">
                 <span class="popup__error-message place-link-input-error"></span>
                 <button class="popup__submit" type="submit">Создать</button>
             </form>
@@ -78,10 +77,6 @@
             </div>
         </li>
     </template>
-    <script type='module' src="./scripts/index.js"></script>
-    <script type="module" src="./scripts/Card.js"></script>
-    <script type="module" src="./scripts/FormValidator.js"></script>
-    <script type="module" src="./scripts/utils.js"></script>
 </body>
 
 </html>
