@@ -61,21 +61,21 @@ function handleOpenEditProfile() {
 };
 
 const imagePopup = new PopupWithImage(indexSelectors.popupViewImage);
+imagePopup.setEventListeners();
 
-function handleCardClick(name, link) {
-    imagePopup.setEventListeners();
-    imagePopup.open(name,link);
+function handleCardClick({ name, link }) {
+    imagePopup.open({ name, link });
 };
 
-function renderCard(cardDetails) {
-    const card = new Card({ data: cardDetails, handleCardClick }, "#add-picture");
+function renderCard({ name, link }) {
+    const card = new Card({ name, link, handleCardClick }, "#add-picture");
     return card.generateCard();
 }
 
 const cardsSection = new Section({
     items: dataArray,
-    renderer: (cardDetails) => {
-        const card = renderCard(cardDetails);
+    renderer: ({ name, link }) => {
+        const card = renderCard({ name, link });
         cardsSection.addItem(card);
     }
 }, '.cards');

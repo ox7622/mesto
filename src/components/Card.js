@@ -1,17 +1,17 @@
 import { selectorsCard } from "../utils/constants.js";
 export default class Card {
-    constructor({ data, handleCardClick }, cardTemplateSelector) {
-        this._name = data.name;
-        this._link = data.link;
+    constructor({ name, link, handleCardClick }, cardTemplateSelector) {
+        this._name = name;
+        this._link = link;
         this._cardTemplateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
-        return this._templateCard = document.querySelector(this._cardTemplateSelector)
-        .content
-        .querySelector(selectorsCard.cardBlock)
-        .cloneNode(true);
+        return document.querySelector(this._cardTemplateSelector)
+            .content
+            .querySelector(selectorsCard.cardBlock)
+            .cloneNode(true);
     };
 
     _handleLike() {
@@ -45,7 +45,7 @@ export default class Card {
         })
 
         this._cardImage.addEventListener('click', () => {
-            this._handleCardClick(this._name, this._link);
+            this._handleCardClick({ name: this._name, link: this._link });
         })
     }
 };
