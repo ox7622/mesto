@@ -112,7 +112,6 @@ editProfileForm.setEventListeners();
 function handleOpenEditProfile() {
     editProfileValidation.clearErrors();
     const updatedData = userInfo.getUserInfo();
-    editProfileValidation.disableSubmitButton();
     editProfileForm.setInputValues(updatedData);
     editProfileForm.open();
 };
@@ -142,7 +141,7 @@ imagePopup.setEventListeners();
 function renderCard(cardData) {
     const card = new Card({
         data: { ...cardData, currentUserId: myUserId },
-        handleCardClick: () => {
+        handleCardClick: (data) => {
             imagePopup.open({ name: data.name, link: data.link });
         },
 

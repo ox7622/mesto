@@ -22,15 +22,6 @@ export default class Card {
             .cloneNode(true);
     };
 
-    removeCard() {
-        this._api.deleteCard(this._cardId).then(() => {
-            this._card.remove();
-            this._card = null;
-            this.close();
-        })
-       
-    }
-
     generateCard() {
         this._card = this._getTemplate();
 
