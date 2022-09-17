@@ -5,4 +5,5 @@ export const selectorsCard = {
     isLiked: 'card__like_active',
     cardLike: '.card__like',
     cardDelete: '.card__delete',
+    cardLikeCount:'.card__like-count'
 }
