@@ -4,19 +4,20 @@ export default class Api {
         this._headers = headers
     }
 
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        } else {
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
+        }
+    }
+
     getCardsInfo() {
         return fetch(`${this._url}/cards`, {
             method: "GET",
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch((err) => console.log("запрос не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
     getProfileInfo() {
@@ -24,14 +25,7 @@ export default class Api {
             method: "GET",
             headers: this._headers
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
 
@@ -41,14 +35,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос edit profile не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
     sendCardData(data) {
@@ -57,14 +44,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос send card не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
     deleteCard(id) {
@@ -72,14 +52,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос на удаление карточки не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
 
@@ -88,14 +61,7 @@ export default class Api {
             method: "PUT",
             headers: this._headers,
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос send like не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
     removeLike(id) {
@@ -103,14 +69,7 @@ export default class Api {
             method: "DELETE",
             headers: this._headers,
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос на удаление лайка не выполнен: " + err))
+            .then(this._checkResponse)
     }
 
     changeAvatar(link) {
@@ -119,14 +78,6 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(link)
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-                }
-            })
-            .catch(err => console.log("запрос edit avatar не выполнен: " + err))
+            .then(this._checkResponse)
     }
-
 }

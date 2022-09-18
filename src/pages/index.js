@@ -5,26 +5,10 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import { FormValidator, selectorsValidation } from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 import PopupWithConfirm from '../components/PopupWithConfirm.js';
-import { selectorsCard } from '../utils/constants.js';
+import { selectorsCard, selectorsValidation, indexSelectors } from '../utils/constants.js';
 
-const indexSelectors = {
-    profile: '.profile',
-    buttonEditProfile: '.profile__edit-profile',
-    buttonAddPicture: '.profile__add-photo',
-    profileName: '.profile__name',
-    profileRole: '.profile__role',
-    profileAvatar: ".profile__avatar",
-    nameInput: '.popup__input_field_name',
-    roleInput: '.popup__input_field_role',
-    popupAddPicture: '.popup_add-picture',
-    popupEditProfile: '.popup_edit-profile',
-    popupViewImage: '.popup_view-image',
-    popupConfirm: '.popup_confirm',
-    popupAvatar: '.popup_change-avatar',
-    popupSubmit: ".popup__submit"
-}
 
 // popups
 const popupEditProfile = document.querySelector(indexSelectors.popupEditProfile);
@@ -64,7 +48,7 @@ function getData() {
             const data = cards.reverse().map(item => ({ name: item.name, link: item.link, allLikes: item.likes, likeCount: item.likes.length, ownerId: item.owner._id, cardId: item._id }));
             cardList.renderItem(data);
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log("запрос на получение исходных данных не выполнен: " + err));
 }
 
 getData();
@@ -74,12 +58,11 @@ const changeAvatarForm = new PopupWithForm({
     handleFormSubmit: (avatarLink) => {
         renderLoading(true, indexSelectors.popupAvatar);
         api.changeAvatar(avatarLink).then(res => {
-            profileAvatar.style.backgroundImage = `url(${avatarLink})`;
-            getData();
+            userInfo.setUserInfo({ name: res.name, role: res.about, avatarLink: res.avatar});
             changeAvatarValidation.disableSubmitButton();
             changeAvatarForm.close();
         })
-            .catch(err => console.log(err))
+            .catch((err) => console.log("запрос на смену аватара не выполнен: " + err))
             .finally(() => renderLoading(false, indexSelectors.popupAvatar));
     }
 });
@@ -91,19 +74,18 @@ function patchInputValues(data) {
     renderLoading(true, indexSelectors.popupEditProfile);
     api.editProfileInfo({ name: data.name, about: data.role })
         .then((res) => {
-            userInfo.setUserInfo({ name: res.name, role: res.about, avatarLink: res.avatar });
+            userInfo.setUserInfo({ name: res.name, role: res.about, avatarLink: res.avatar});
             editProfileForm.setInputValues(res);
+            editProfileForm.close();
         })
-        .catch(err => console.log(err))
+        .catch((err) => console.log("запрос на редактирование данных пользователя не выполнен: " + err))
         .finally(() => renderLoading(false, indexSelectors.popupEditProfile));
 }
 
 const editProfileForm = new PopupWithForm({
     popupSelector: indexSelectors.popupEditProfile,
     handleFormSubmit: (data) => {
-        userInfo.setUserInfo(data);
         patchInputValues(data);
-        editProfileForm.close();
     },
 });
 
@@ -128,7 +110,7 @@ const addPhotoForm = new PopupWithForm({
                 addPhotoValidation.disableSubmitButton();
                 addPhotoForm.close();
             })
-            .catch(err => console.log(err))
+            .catch((err) => console.log("запрос на добавление картинки не выполнен: " + err))
             .finally(() => renderLoading(false, indexSelectors.popupAddPicture));
     }
 });
@@ -138,6 +120,9 @@ addPhotoForm.setEventListeners();
 const imagePopup = new PopupWithImage(indexSelectors.popupViewImage);
 imagePopup.setEventListeners();
 
+const confirmPopup = new PopupWithConfirm(indexSelectors.popupConfirm);
+confirmPopup.setEventListeners();
+
 function renderCard(cardData) {
     const card = new Card({
         data: { ...cardData, currentUserId: myUserId },
@@ -145,10 +130,18 @@ function renderCard(cardData) {
             imagePopup.open({ name: data.name, link: data.link });
         },
 
-        handleImageDelete: (data) => {
-            const confirmPopup = new PopupWithConfirm({ popupSelector: indexSelectors.popupConfirm, api: api, cardId: data.cardId, card: data.card });
+        handleImageDelete: () => {
             confirmPopup.open();
-            confirmPopup.setEventListeners();
+            confirmPopup.submitHandler(() => {
+                renderLoading(true, indexSelectors.popupConfirm);
+                api.deleteCard(card._cardId).then(() => {
+                card.handleImageRemove();
+                confirmPopup.close();
+                })
+                .catch((err) => console.log("запрос на удаление картинки не выполнен: " + err))
+                .finally(() => renderLoading(false, indexSelectors.popupConfirm));
+            })
+
         },
         handleLikeClick: (data) => {
             const cardLike = data.card.querySelector(selectorsCard.cardLike);
@@ -158,16 +151,16 @@ function renderCard(cardData) {
                     cardLike.classList.remove(selectorsCard.isLiked);
                     likeCount.textContent = res.likes.length;
                 })
-                    .catch(err => console.log(err))
+                    .catch((err) => console.log("запрос на снятие лайка не выполнен: " + err))
             } else {
                 api.setLike(data.cardId).then(res => {
                     cardLike.classList.add(selectorsCard.isLiked);
                     likeCount.textContent = res.likes.length;
                 })
-                    .catch(err => console.log(err));
+                    .catch((err) => console.log("запрос на отправку лайка не выполнен: " + err))
             }
         }
-    }, "#add-picture");
+    }, "#add-picture", selectorsCard);
     return card.generateCard();
 }
 

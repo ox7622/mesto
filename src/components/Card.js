@@ -1,6 +1,6 @@
-import { selectorsCard } from "../utils/constants.js";
 export default class Card {
-    constructor({ data, handleCardClick, handleLikeClick, handleImageDelete }, cardTemplateSelector) {
+    constructor({ data, handleCardClick, handleLikeClick, handleImageDelete }, cardTemplateSelector, selectors) {
+        this._selectors = selectors;
         this._name = data.name;
         this._link = data.link;
         this._likeCount = data.likeCount;
@@ -12,38 +12,42 @@ export default class Card {
         this._handleCardClick = handleCardClick;
         this._handleLikeClick = handleLikeClick;
         this._handleImageDelete = handleImageDelete;
-
     }
 
     _getTemplate() {
         return document.querySelector(this._cardTemplateSelector)
             .content
-            .querySelector(selectorsCard.cardBlock)
+            .querySelector(this._selectors.cardBlock)
             .cloneNode(true);
     };
 
     generateCard() {
         this._card = this._getTemplate();
 
-        this._cardImage = this._card.querySelector(selectorsCard.cardImage);
-        this._cardLike = this._card.querySelector(selectorsCard.cardLike);
-        this._likeCountDiv = this._card.querySelector(selectorsCard.cardLikeCount);
-        this._deleteButton = this._card.querySelector(selectorsCard.cardDelete);
+        this._cardImage = this._card.querySelector(this._selectors.cardImage);
+        this._cardLike = this._card.querySelector(this._selectors.cardLike);
+        this._likeCountDiv = this._card.querySelector(this._selectors.cardLikeCount);
+        this._deleteButton = this._card.querySelector(this._selectors.cardDelete);
 
         if (this._ownerId !== this._myId) {
             this._deleteButton.classList.add('card__delete_hide');
             this._deleteButton.disabled = true;
         }
         if (this._cardLikes.some(item => (item._id === this._myId))) {
-            this._cardLike.classList.add(selectorsCard.isLiked)
+            this._cardLike.classList.add(this._selectors.isLiked)
         }
         this._likeCountDiv.textContent = this._likeCount;
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
 
-        this._card.querySelector(selectorsCard.cardTitle).textContent = this._name;
+        this._card.querySelector(this._selectors.cardTitle).textContent = this._name;
         this._setEventListeners();
         return this._card;
+    }
+
+    handleImageRemove() {
+        this._card.remove();
+        this._card = null;
     }
 
     _setEventListeners() {
@@ -51,7 +55,7 @@ export default class Card {
             this._handleLikeClick({ cardId: this._cardId, card: this._card });
         })
 
-        this._card.querySelector(selectorsCard.cardDelete).addEventListener('click', () => {
+        this._card.querySelector(this._selectors.cardDelete).addEventListener('click', () => {
             this._handleImageDelete({ cardId: this._cardId, card: this._card });
         })
 
